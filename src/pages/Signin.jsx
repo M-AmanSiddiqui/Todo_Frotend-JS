@@ -23,7 +23,8 @@ export default function SignIn() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/v1/signin", Inputs);
+      const base = import.meta.env.VITE_API_BASE || "";
+      const response = await axios.post(`${base}/api/v1/signin`, Inputs);
 
       if (response.data && response.data.others) {
         sessionStorage.setItem("id", response.data.others._id);

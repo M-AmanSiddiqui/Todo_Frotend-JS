@@ -16,9 +16,8 @@ export default function Todo() {
   // Fetch Tasks
   const fetchTasks = async () => {
     try {
-      const response = await axios.get(
-        `/api/v2/getTasks/${userId}`
-      );
+      const base = import.meta.env.VITE_API_BASE || "";
+      const response = await axios.get(`${base}/api/v2/getTasks/${userId}`);
       if (response.data.list) {
         setTasks(response.data.list);
       } else {
@@ -45,10 +44,8 @@ export default function Todo() {
     try {
       if (editId) {
         // Update
-        await axios.put(
-          `/api/v2/updateTask/${editId}`,
-          { title, body }
-        );
+        const base = import.meta.env.VITE_API_BASE || "";
+        await axios.put(`${base}/api/v2/updateTask/${editId}`, { title, body });
 
         setTasks((prev) =>
           prev.map((task) =>
@@ -60,17 +57,15 @@ export default function Todo() {
         setEditId(null);
       } else {
         // Add
-        const response = await axios.post(
-          "/api/v2/addTask",
-          {
-            title,
-            body,
-            id: userId,
-          }
-        );
+        const base = import.meta.env.VITE_API_BASE || "";
+        const response = await axios.post(`${base}/api/v2/addTask`, {
+          title,
+          body,
+          id: userId,
+        });
 
-        if (response.data.task) {
-          setTasks((prev) => [...prev, response.data.task]);
+        if (response.data.list) {
+          setTasks((prev) => [...prev, response.data.list]);
         }
 
         toast.success("✅ Task added successfully!");
