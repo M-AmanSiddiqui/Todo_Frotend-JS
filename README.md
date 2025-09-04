@@ -1,4 +1,4 @@
-# ✅ Todo App  
+#  Todo App  
 
 A full-stack **Task Management Application** built with **React, Node.js, Express, MongoDB**, and **Redux**.  
 This app allows users to **register, login, and manage their daily tasks** with a clean and modern UI.  
@@ -50,7 +50,7 @@ If you like this project, don’t forget to **star ⭐ the repository**.
 
 
 
-##  Author  
+## 🧑‍💻 Author  
 
 **Aman Siddiqui**  
 💼 Full Stack Developer  
