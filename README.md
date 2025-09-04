@@ -1,45 +1,50 @@
-#  Todo App  
+📝 Todo App 
 
-A full-stack **Task Management Application** built with **React, Node.js, Express, MongoDB**, and **Redux**.  
-This app allows users to **register, login, and manage their daily tasks** with a clean and modern UI.  
+A modern Task Management Frontend built with React, TailwindCSS, Redux, and Axios.
+This project provides a clean and responsive UI for managing daily tasks, while connecting to a backend API (Node.js + Express + MongoDB).
 
+🚀 Features
 
+🔐 User Authentication (Login & Signup UI)
 
-## 🚀 Features  
+📝 Add, Edit, Delete Tasks
 
-- 🔐 Secure User Authentication (Login & Signup with JWT)  
-- 📝 Add, Edit, Delete Tasks  
-- 📖 Expandable Task Card (Read More / Read Less)  
-- ⚡ Toast Notifications (React-Toastify)  
-- 🎨 Modern UI with TailwindCSS & Lucide Icons  
-- 🗄️ MongoDB Atlas Database  
+📖 Expandable Task Cards (Read More / Read Less)
 
+⚡ Toast Notifications (React-Toastify)
 
+🎨 Modern & Responsive UI with TailwindCSS + Lucide Icons
 
-## 🛠️ Tech Stack  
+🔗 API calls with Axios
 
-**Frontend**  
-- ⚛️ React  
-- 🎨 TailwindCSS  
-- 🔔 React-Toastify  
-- 🔗 Axios  
+🛠️ Tech Stack
 
-**Backend**  
-- 🟢 Node.js  
-- 🚂 Express.js  
-- 🍃 MongoDB (Mongoose ORM)  
-- 🔐 JWT Authentication  
+Frontend
 
+⚛️ React
 
+🎨 TailwindCSS
 
-## 📂 Project Highlights  
+🔔 React-Toastify
 
-- 🔥 Built with **MERN Stack** for performance and scalability  
-- 💾 All tasks are stored in a **secure MongoDB database**  
-- 🌐 Optimized for modern browsers  
-- 📱 Fully responsive design  
+🔗 Axios
 
+📦 Redux Toolkit
 
+📂 Project Highlights
+
+🖥️ Beautiful & modern UI built with React + TailwindCSS
+
+🔄 Real-time task updates with Redux Toolkit
+
+🌐 Connects seamlessly with backend API
+
+📱 Fully responsive design
+
+📌 Note
+
+This repository contains only the frontend code.
+👉 The backend (Node.js, Express, MongoDB, JWT) is available in a separate repository.
 
 
 
