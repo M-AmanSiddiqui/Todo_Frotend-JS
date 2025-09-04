@@ -35,7 +35,8 @@ export default function SignUp() {
       });
 
       setTimeout(() => {
-        history("/signin");
+        // Use hard redirect to ensure a clean mount of Sign In page
+        window.location.href = "/signin";
       }, 1500);
     } catch (error) {
       if (error.response && error.response.status === 409) {

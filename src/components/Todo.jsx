@@ -10,11 +10,20 @@ export default function Todo() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [editId, setEditId] = useState(null);
+  const [userId, setUserId] = useState(sessionStorage.getItem("id"));
 
-  let userId = sessionStorage.getItem("id");
+  // Check if user is logged in
+  useEffect(() => {
+    const id = sessionStorage.getItem("id");
+    setUserId(id);
+  }, []);
 
   // Fetch Tasks
   const fetchTasks = async () => {
+    if (!userId) {
+      toast.error("❌ Please login first to view your tasks!");
+      return;
+    }
     try {
       const base = import.meta.env.VITE_API_BASE || "";
       const response = await axios.get(`${base}/api/v2/getTasks/${userId}`);
@@ -35,6 +44,10 @@ export default function Todo() {
 
   // Add / Update Task
   const addTask = async () => {
+    if (!userId) {
+      toast.error("❌ Please login first to add tasks!");
+      return;
+    }
     if (!title.trim() || !body.trim()) return;
     if (title.length > 20) {
       toast.error("❌ Title must be 20 characters or less!");
@@ -88,9 +101,14 @@ export default function Todo() {
 
   // Delete Task
   const deleteTask = async (taskId) => {
+    if (!userId) {
+      toast.error("❌ Please login first to delete tasks!");
+      return;
+    }
     try {
+      const base = import.meta.env.VITE_API_BASE || "";
       await axios.delete(
-        `/api/v2/deleteTask/${taskId}/${userId}`
+        `${base}/api/v2/deleteTask/${taskId}/${userId}`
       );
 
       setTasks((prev) => prev.filter((task) => task._id !== taskId));
@@ -109,6 +127,19 @@ export default function Todo() {
 
       {/* Input Section */}
       <div className="bg-white w-full max-w-3xl rounded-2xl shadow-2xl p-8 mb-10">
+        {!userId ? (
+          <div className="text-center py-8">
+            <h2 className="text-2xl font-bold text-gray-600 mb-4">Please Login First</h2>
+            <p className="text-gray-500 mb-6">You need to be logged in to add and manage your tasks.</p>
+            <a 
+              href="/signin" 
+              className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-indigo-700 transition"
+            >
+              Go to Login
+            </a>
+          </div>
+        ) : (
+        <>
         <h1 className="text-3xl font-extrabold text-center text-indigo-600 mb-6">
           Todo App
         </h1>
@@ -137,21 +168,25 @@ export default function Todo() {
         >
           <Plus /> {editId ? "Update Task" : "Add Task"}
         </button>
+        </>
+        )}
       </div>
 
       {/* Task List */}
-      <div className="w-full max-w-5xl rounded-2xl shadow-2xl p-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-          {tasks.map((task) => (
-            <TaskCard
-              key={task._id}
-              task={task}
-              editTask={editTask}
-              deleteTask={() => deleteTask(task._id)}
-            />
-          ))}
+      {userId && (
+        <div className="w-full max-w-5xl rounded-2xl shadow-2xl p-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+            {tasks.map((task) => (
+              <TaskCard
+                key={task._id}
+                task={task}
+                editTask={editTask}
+                deleteTask={() => deleteTask(task._id)}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

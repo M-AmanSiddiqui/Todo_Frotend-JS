@@ -15,5 +15,13 @@ export default defineConfig({
     proxy: {
       "/api": "http://localhost:1000" // local testing ke liye
     }
+  },
+  define: {
+    // Set default API base URL for production
+    'import.meta.env.VITE_API_BASE': JSON.stringify(
+      process.env.NODE_ENV === 'production' 
+        ? 'https://todo-backend-js.vercel.app' 
+        : ''
+    )
   }
 });
